@@ -27,9 +27,7 @@ Thumbs.db
 *.mp3
 *.flac
 
-# Model files (download separately)
-models/vosk-model-*/
-models/*.zip
+# Model files are managed automatically by faster-whisper
 
 # Logs
 *.log

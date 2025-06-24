@@ -1,5 +1,0 @@
-# This file ensures the models directory is tracked by git
-# ASR model files will be stored here:
-# - vosk-model/ (Vosk speech recognition models)
-# - whisper-models/ (Whisper.cpp models, if used)
-# - punctuation-model/ (DeepMultilingualPunctuation model cache) 
