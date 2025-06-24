@@ -35,10 +35,14 @@ python main.py
 To have Heve AI automatically start when you login:
 
 ```bash
-# Copy service file to LaunchAgents (already done during installation)
+# 1. Create your custom plist file from template
+cp com.heveai.dictation.plist.template com.heveai.dictation.plist
+
+# 2. Edit the file and replace "/path/to/your/heveai" with your actual path
+# 3. Copy service file to LaunchAgents
 cp com.heveai.dictation.plist ~/Library/LaunchAgents/
 
-# Load the service (starts immediately and on every login)
+# 4. Load the service (starts immediately and on every login)
 launchctl load ~/Library/LaunchAgents/com.heveai.dictation.plist
 ```
 

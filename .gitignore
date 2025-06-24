@@ -33,4 +33,7 @@ models/*.zip
 
 # Logs
 *.log
-logs/ 
+logs/
+
+# System-specific files
+com.heveai.dictation.plist 
