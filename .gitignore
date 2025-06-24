@@ -32,4 +32,5 @@ models/vosk-model-*/
 models/*.zip
 
 # Logs
-*.log 
+*.log
+logs/ 
