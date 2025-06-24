@@ -1,4 +1,4 @@
 # Core dependencies only
 pynput>=1.7.6
 pyaudio>=0.2.11
-vosk>=0.3.44 
+faster-whisper>=1.1.1 

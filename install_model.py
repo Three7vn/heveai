@@ -8,8 +8,9 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-MODEL_URL = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
-MODEL_NAME = "vosk-model-small-en-us-0.15"
+# Using larger, more accurate model (~1GB vs ~40MB)
+MODEL_URL = "https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip"
+MODEL_NAME = "vosk-model-en-us-0.22"
 
 def download_model():
     models_dir = Path("models")
@@ -19,7 +20,10 @@ def download_model():
         print(f"Model already exists: {MODEL_NAME}")
         return
     
-    print(f"Downloading {MODEL_NAME}...")
+    print(f"Downloading {MODEL_NAME} (~1GB - better accuracy)...")
+    
+    # Create models directory
+    models_dir.mkdir(exist_ok=True)
     
     # Download
     zip_path = models_dir / f"{MODEL_NAME}.zip"
