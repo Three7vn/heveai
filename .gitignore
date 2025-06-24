@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Audio files
+*.wav
+*.mp3
+*.flac
+
+# Model files (download separately)
+models/vosk-model-*/
+models/*.zip
+
+# Logs
+*.log 
