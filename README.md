@@ -1,5 +1,7 @@
 # Heve AI
 
+**Intelligent real-time speech-to-text for people who hate typing (like me).**
+
 Hold **Right Option (⌥)** and speak to instantly dictate text into any app.
 
 ## How it works
@@ -8,10 +10,6 @@ Hold **Right Option (⌥)** and speak to instantly dictate text into any app.
 2. Speak naturally 
 3. Release **Right Option** key
 4. Text appears in your active app
-
-## Why Right Option instead of Fn?
-
-The **Fn key** on Mac is handled at hardware level and cannot be reliably detected by software. **Right Option (⌥)** is right next to the spacebar and works perfectly for hold-to-talk functionality.
 
 ## Features
 

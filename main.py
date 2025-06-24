@@ -15,7 +15,7 @@ from key_listener import KeyListener
 from audio_capture import AudioCapture
 from asr import ASREngine
 from injector import TextInjector
-from punctuator import Punctuator
+from advanced_punctuator import AdvancedPunctuator
 
 
 def main():
@@ -25,7 +25,7 @@ def main():
     audio = AudioCapture()
     asr = ASREngine()
     injector = TextInjector()
-    punctuator = Punctuator()
+    punctuator = AdvancedPunctuator()
     
     def start_dictation():
         print("Recording...")
@@ -36,7 +36,7 @@ def main():
         audio_data = audio.stop()
         text = asr.transcribe(audio_data)
         if text.strip():
-            # Add punctuation and capitalization
+            # Add advanced punctuation and capitalization
             formatted_text = punctuator.add_punctuation(text)
             injector.type_text(formatted_text)
             print(f"Typed: {formatted_text}")
