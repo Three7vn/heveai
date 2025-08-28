@@ -1,13 +1,13 @@
 # Heve AI
 
-**Intelligent real-time speech-to-text for people who hate typing (like me).**
+**Intelligent, privacy-first real-time speech-to-text for people who hate typing (like me).**
 
 Hold **Right Option (⌥)** and speak to instantly dictate text into any app.
 
 ## How it works
 
 1. Hold down the **Right Option (⌥)** key - to the right of spacebar
-2. Speak naturally 
+2. Speak naturally
 3. Release **Right Option** key
 4. Text appears in your active app
 
@@ -17,7 +17,7 @@ Hold **Right Option (⌥)** and speak to instantly dictate text into any app.
 - **Universal**: Works in any application
 - **Fast**: Real-time speech recognition with Whisper
 - **Simple**: Just hold Right Option and speak
-- **Ultra-fast typing**: 50x faster text injection
+- **Ultra-fast typing**: Sub-second text injection
 - **Auto-start**: Runs automatically when you login
 
 ## Installation
@@ -75,13 +75,25 @@ Use the included service control script:
 Run the app and hold **Right Option (⌥)** while speaking. Text will be typed wherever your cursor is.
 
 **Important**: If text doesn't appear, you need to grant accessibility permissions:
-- **System Settings** → **Privacy & Security** → **Accessibility** 
-- Add **Terminal** and enable it
+
+- **System Settings** → **Privacy & Security** → **Accessibility**
+- Add **Terminal** and **Python** and enable it
 
 Once the service is running, just **hold Right Option (⌥) and speak** - it's always ready!
 
 Press **Ctrl+C** to quit (if running manually).
 
+## Supervised Fine-Tuning
+
+Heve AI automatically collects training data for model improvement:
+
+- **Data Collection**: Audio and transcriptions saved to `training/data/`
+- **Manual Correction**: Edit `training/data/transcriptions.csv` to add corrected transcriptions
+- **Fine-Tuning**: Run `python training/training_pipeline.py` to improve accuracy
+- **Benefits**: Better accuracy for your voice, vocabulary, and speaking patterns
+
+Recommended to have 100+ corrected samples to start training.
+
 ## Need Help?
 
-If you need help setting up Heve AI, email avram {at} beesumbodi.com. 
+If you need help setting up Heve AI, email avram {at} beesumbodi.me.

@@ -2,8 +2,10 @@
 Text injection - ultra-fast typing, minimal delays
 """
 
-from pynput.keyboard import Controller
+from pynput.keyboard import Controller, Key
+import subprocess
 import time
+import os
 
 
 class TextInjector:
@@ -13,17 +15,13 @@ class TextInjector:
         self.keyboard._delay = 0.001  # 1ms delay instead of default ~50ms
     
     def type_text(self, text):
-        """Type text with ultra-fast speed"""
+        """Type text directly - simple and reliable"""
         if not text.strip():
             return
         
-        # Type with minimal delays for maximum speed
-        for char in text:
-            self.keyboard.press(char)
-            self.keyboard.release(char)
-            # Minimal delay for reliability but maximum speed
-            time.sleep(0.001)  # 1ms between characters = 1000 chars/second
-        
-        # Add space at the end
-        self.keyboard.press(' ')
-        self.keyboard.release(' ') 
+        try:
+            # Simple direct typing - this works
+            self.keyboard.type(text + ' ')
+            print(f"✅ Text injected: {text}")
+        except Exception as e:
+            print(f"❌ Injection failed: {e}") 

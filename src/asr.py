@@ -1,16 +1,16 @@
 """
 Speech recognition using faster-whisper (OpenAI Whisper)
-Much better accuracy than Vosk while still running locally
 """
 
 import numpy as np
 import io
 import wave
 from faster_whisper import WhisperModel
+from data_logger import DataLogger
 
 
 class ASREngine:
-    def __init__(self, model_size="base"):
+    def __init__(self, model_size="base", enable_logging=True):
         """
         Initialize Whisper model
         Model sizes: tiny, base, small, medium, large
@@ -21,6 +21,12 @@ class ASREngine:
             self.model = WhisperModel(model_size, device="cpu", compute_type="int8")
             self.sample_rate = 16000
             print(f"Loaded Whisper model ({model_size})")
+            
+            # Initialize data logger
+            self.logger = DataLogger() if enable_logging else None
+            if self.logger:
+                print("📝 Data logging enabled - saving audio/transcriptions for training")
+                
         except Exception as e:
             print(f"Could not load Whisper model: {e}")
             raise
@@ -47,6 +53,10 @@ class ASREngine:
             
             # Combine all segments
             text = " ".join([segment.text for segment in segments])
+            
+            # Log the audio and transcription for training
+            if self.logger and text.strip():
+                self.logger.save_transcription(audio_data, text.strip(), self.sample_rate)
             
             return text.strip()
             
