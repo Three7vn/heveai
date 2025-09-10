@@ -89,7 +89,7 @@ Heve AI automatically collects training data for model improvement:
 
 - **Data Collection**: Audio and transcriptions saved to `training/data/`
 - **Manual Correction**: Edit `training/data/transcriptions.csv` to add corrected transcriptions
-- **Fine-Tuning**: Run `python training/training_pipeline.py` to improve accuracy
+- **Methodology**: LoRA fine-tuning with 4-bit quantization for efficiency
 - **Benefits**: Better accuracy for your voice, vocabulary, and speaking patterns
 
 Recommended to have 100+ corrected samples to start training.

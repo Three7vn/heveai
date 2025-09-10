@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Heve AI - Lean speech-to-text dictation
+Heve AI - Speech-to-text dictation
 Hold Right Option key and speak to dictate text
 """
 

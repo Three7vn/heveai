@@ -1,0 +1,48 @@
+{
+  "replacements": {
+    "dupy turn notebook": "Jupyter notebook",
+    "duppy turn notebook": "Jupyter notebook",
+    "jupiter notebook": "Jupyter notebook",
+    "dupyton o'book": "Jupyter notebook",
+    "dupe it in a book": "Jupyter notebook",
+    "Laura": "LoRA",
+    "Lora": "LoRA",
+    "get hub": "GitHub",
+    "github": "GitHub",
+    "wind surf": "Windsurf",
+    "winsurf": "Windsurf",
+    "python file": "Python file",
+    "pi file": "Python file",
+    "gear ignore": ".gitignore",
+    "git ignore": ".gitignore",
+    "fine tuning": "fine-tuning",
+    "finetuning": "fine-tuning",
+    "quantization": "quantization",
+    "cascade": "Cascade"
+  },
+  "technical_terms": [
+    "LoRA", "Jupyter", "GitHub", "Windsurf", "PyTorch", 
+    "Hugging Face", "transformers", "quantization", "Cascade",
+    "Python", "CSV", "JSON", "API", "GPU", "CPU", "RAM",
+    "macOS", "LaunchAgent", "plist", "SSH", "HTTP", "HTTPS"
+  ],
+  "context_mappings": {
+    "notebook": {
+      "coding_context": "Jupyter notebook",
+      "default": "notebook"
+    },
+    "file": {
+      "python_context": "Python file",
+      "default": "file"
+    },
+    "hub": {
+      "git_context": "GitHub",
+      "default": "hub"
+    }
+  },
+  "audio_snippets": {
+    "enabled": true,
+    "snippet_duration": 2.0,
+    "context_padding": 0.5
+  }
+}

@@ -2,15 +2,20 @@
 Speech recognition using faster-whisper (OpenAI Whisper)
 """
 
+import whisper
 import numpy as np
-import io
-import wave
-from faster_whisper import WhisperModel
+import torch
+from pathlib import Path
+import sys
+
+# Add the training directory to the path for imports
+sys.path.append(str(Path(__file__).parent.parent / "training"))
 from data_logger import DataLogger
+from dictionary_corrector import DictionaryCorrector
 
 
 class ASREngine:
-    def __init__(self, model_size="base", enable_logging=True):
+    def __init__(self, model_size="base", enable_logging=True, enable_dictionary=True):
         """
         Initialize Whisper model
         Model sizes: tiny, base, small, medium, large
@@ -18,7 +23,7 @@ class ASREngine:
         """
         try:
             print(f"Loading Whisper model ({model_size})...")
-            self.model = WhisperModel(model_size, device="cpu", compute_type="int8")
+            self.model = whisper.load_model(model_size)
             self.sample_rate = 16000
             print(f"Loaded Whisper model ({model_size})")
             
@@ -26,6 +31,11 @@ class ASREngine:
             self.logger = DataLogger() if enable_logging else None
             if self.logger:
                 print("📝 Data logging enabled - saving audio/transcriptions for training")
+            
+            # Initialize dictionary corrector
+            self.dictionary = DictionaryCorrector() if enable_dictionary else None
+            if self.dictionary:
+                print("📚 Dictionary correction enabled - real-time vocabulary fixes")
                 
         except Exception as e:
             print(f"Could not load Whisper model: {e}")
@@ -41,24 +51,25 @@ class ASREngine:
             audio_np = self._bytes_to_numpy(audio_data)
             
             # Transcribe with Whisper
-            segments, info = self.model.transcribe(
-                audio_np,
-                language="en",
-                beam_size=5,
-                best_of=5,
-                temperature=0.0,
-                vad_filter=True,  # Voice activity detection
-                vad_parameters=dict(min_silence_duration_ms=1000)
-            )
+            result = self.model.transcribe(audio_np, language="en")
+            raw_text = result["text"].strip()
             
-            # Combine all segments
-            text = " ".join([segment.text for segment in segments])
+            # Apply real-time dictionary corrections
+            corrected_text = raw_text
+            if self.dictionary:
+                corrected_text = self.dictionary.apply_real_time_corrections(raw_text)
+                
+                # If corrections were made, suggest adding to dictionary
+                if corrected_text != raw_text:
+                    suggestions = self.dictionary.suggest_corrections(raw_text, corrected_text)
+                    for wrong, correct in suggestions:
+                        print(f"💡 Dictionary suggestion: '{wrong}' → '{correct}'")
             
             # Log the audio and transcription for training
-            if self.logger and text.strip():
-                self.logger.save_transcription(audio_data, text.strip(), self.sample_rate)
+            if self.logger and corrected_text:
+                self.logger.save_transcription(audio_data, corrected_text, self.sample_rate)
             
-            return text.strip()
+            return corrected_text
             
         except Exception as e:
             print(f"❌ Transcription error: {e}")

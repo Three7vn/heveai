@@ -1,0 +1,11 @@
+audio_file,original_transcription,corrected_transcription,timestamp
+audio_001.wav,"Hello world, this is a test of the heve AI system.","Hello world, this is a test of the Heve AI system.",2024-01-15 10:30:45
+audio_002.wav,"I need to create a new dupyton o'book for my machine learning project.","I need to create a new Jupyter notebook for my machine learning project.",2024-01-15 10:32:12
+audio_003.wav,"Let me push this code to get hub using wind surf.","Let me push this code to GitHub using Windsurf.",2024-01-15 10:35:28
+audio_004.wav,"The Laura fine tuning process uses quantization for efficiency.","The LoRA fine-tuning process uses quantization for efficiency.",2024-01-15 10:38:15
+audio_005.wav,"Make sure to add the data files to the gear ignore.","Make sure to add the data files to the .gitignore.",2024-01-15 10:40:33
+audio_006.wav,"This pi file contains the main logic for speech recognition.","This Python file contains the main logic for speech recognition.",2024-01-15 10:42:18
+audio_007.wav,"The model performs real time transcription with low latency.","The model performs real-time transcription with low latency.",2024-01-15 10:45:02
+audio_008.wav,"We use whisper for automatic speech recognition tasks.","We use Whisper for automatic speech recognition tasks.",2024-01-15 10:47:35
+audio_009.wav,"The system supports voice activated text injection.","The system supports voice-activated text injection.",2024-01-15 10:50:12
+audio_010.wav,"Training data helps improve accuracy for your specific voice patterns.","Training data helps improve accuracy for your specific voice patterns.",2024-01-15 10:52:48
