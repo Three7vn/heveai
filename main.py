@@ -8,6 +8,7 @@ import sys
 import time
 import os
 import atexit
+import threading
 from pathlib import Path
 
 # Add src to path
@@ -18,6 +19,7 @@ from audio_capture import AudioCapture
 from asr import ASREngine
 from injector import TextInjector
 from advanced_punctuator import AdvancedPunctuator
+from grammar_corrector import GrammarCorrector
 
 # Lock file to prevent multiple instances
 LOCK_FILE = Path("/tmp/heve_ai.lock")
@@ -63,6 +65,7 @@ def main():
     asr = ASREngine()
     injector = TextInjector()
     punctuator = AdvancedPunctuator()
+    grammar_corrector = GrammarCorrector(enable_correction=True)
     
     def start_dictation():
         print("Recording...")
@@ -71,12 +74,33 @@ def main():
     def stop_dictation():
         print("Processing...")
         audio_data = audio.stop()
-        text = asr.transcribe(audio_data)
+        text, audio_log_data = asr.transcribe(audio_data)
         if text.strip():
             # Add advanced punctuation and capitalization
             formatted_text = punctuator.add_punctuation(text)
-            injector.type_text(formatted_text)
-            print(f"Typed: {formatted_text}")
+            
+            # Apply grammar correction
+            corrected_text = grammar_corrector.correct_grammar(formatted_text)
+            
+            # 🚀 INJECT TEXT FIRST - HIGHEST PRIORITY
+            injector.type_text(corrected_text)
+            print(f"Typed: {corrected_text}")
+            
+            # Log to CSV in background AFTER injection
+            def log_to_csv():
+                if audio_log_data and asr.logger:
+                    audio_data_for_log, raw_text, sample_rate = audio_log_data
+                    audio_filename = asr.logger.save_transcription(audio_data_for_log, raw_text, sample_rate)
+                    if audio_filename:
+                        asr.logger.update_correction(audio_filename, corrected_text)
+                        if corrected_text != text:
+                            print(f"📝 Grammar correction applied: '{text}' → '{corrected_text}'")
+                        else:
+                            print(f"📝 Final transcription logged: '{corrected_text}'")
+            
+            # Run CSV logging in background AFTER text injection
+            threading.Thread(target=log_to_csv, daemon=True).start()
+            
         else:
             print("No speech detected")
     

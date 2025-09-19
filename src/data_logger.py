@@ -30,7 +30,7 @@ class DataLogger:
             writer = csv.writer(f)
             writer.writerow(['timestamp', 'audio_file', 'transcription', 'corrected_transcription', 'audio_duration'])
     
-    def save_transcription(self, audio_data, transcription, sample_rate=16000):
+    def save_transcription(self, audio_data, transcription, sample_rate=16000, corrected_transcription=None):
         """Save audio file and transcription to CSV"""
         try:
             # Generate unique filename
@@ -55,12 +55,12 @@ class DataLogger:
                     timestamp,
                     audio_filename,
                     transcription,
-                    "",  # corrected_transcription (empty for now)
+                    corrected_transcription or "",  # Use corrected version if provided
                     f"{duration:.2f}"
                 ])
             
             print(f"📝 Logged: {audio_filename} -> '{transcription}' (saved to {self.csv_file})")
-            return True
+            return audio_filename  # Return filename for later updates
             
         except Exception as e:
             print(f"❌ Failed to log data: {e}")

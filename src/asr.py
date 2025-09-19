@@ -44,7 +44,7 @@ class ASREngine:
     def transcribe(self, audio_data):
         """Convert audio data to text using Whisper"""
         if not audio_data:
-            return ""
+            return "", None
         
         try:
             # Convert audio bytes to numpy array
@@ -65,15 +65,12 @@ class ASREngine:
                     for wrong, correct in suggestions:
                         print(f"💡 Dictionary suggestion: '{wrong}' → '{correct}'")
             
-            # Log the audio and transcription for training
-            if self.logger and corrected_text:
-                self.logger.save_transcription(audio_data, corrected_text, self.sample_rate)
-            
-            return corrected_text
+            # Return text and audio data for logging after injection
+            return corrected_text, (audio_data, raw_text, self.sample_rate) if self.logger else None
             
         except Exception as e:
             print(f"❌ Transcription error: {e}")
-            return ""
+            return "", None
     
     def _bytes_to_numpy(self, audio_data):
         """Convert audio bytes to numpy array for Whisper"""

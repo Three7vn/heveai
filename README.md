@@ -18,6 +18,7 @@ Hold **Right Option (⌥)** and speak to instantly dictate text into any app.
 - **Fast**: Real-time speech recognition with Whisper
 - **Simple**: Just hold Right Option and speak
 - **Ultra-fast typing**: Sub-second text injection
+- **Real-time Grammar Correction**: Automatic grammar enhancement using Gramformer (for short phrases)
 - **Auto-start**: Runs automatically when you login
 
 ## Installation
@@ -93,6 +94,17 @@ Heve AI automatically collects training data for model improvement:
 - **Benefits**: Better accuracy for your voice, vocabulary, and speaking patterns
 
 Recommended to have 100+ corrected samples to start training.
+
+## Grammar Correction
+
+Includes real-time grammar correction using Gramformer:
+
+- **Automatic Enhancement**: Grammar, punctuation, and capitalization improvements
+- **Processing**: Only applied to short phrases (≤50 words) to prevent text truncation (current flaw)
+- **Preserves Meaning**: Conservative corrections that maintain your original intent
+- **Dual Logging**: Both original and corrected transcriptions saved for training data
+
+**Future Enhancement**: The next step is implementing a local language model for real-time grammar correction instead of Gramformer, providing better accuracy and handling longer text.
 
 ## Need Help?
 
